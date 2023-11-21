@@ -9,7 +9,7 @@ import torch.utils.data as data
 import torchvision
 from torch.autograd import Variable
 import matplotlib.pyplot as plt
-from functions import *
+from functions50 import *
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn.metrics import accuracy_score
