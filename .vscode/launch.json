@@ -36,6 +36,17 @@
                 "CUDA_VISIBLE_DEVICES": "0"
             },
             "justMyCode": true
+        },
+        {
+            "name": "Python: ResNetCRNN/UCF101_ResNetCRNN50.py",
+            "type": "python",
+            "request": "launch",
+            "program": "ResNetCRNN/UCF101_ResNetCRNN50.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "justMyCode": true
         }
     ]
 }
