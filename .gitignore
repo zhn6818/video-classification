@@ -1,0 +1,6 @@
+__pycache__
+CRNN_ckpt
+/CRNN/CRNN_epoch_test_loss.npy
+/CRNN/CRNN_epoch_test_score.npy
+/CRNN/CRNN_epoch_training_losses.npy
+/CRNN/CRNN_epoch_training_scores.npy

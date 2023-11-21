@@ -16,9 +16,9 @@ from sklearn.metrics import accuracy_score
 import pickle
 
 # set path
-data_path = "./jpegs_256/"    # define UCF-101 RGB data path
-action_name_path = './UCF101actions.pkl'
-save_model_path = "./ResNetCRNN_ckpt/"
+data_path = "/data1/zhn/macdata/all_data/UCF101/jpegs_256/"    # define UCF-101 RGB data path
+action_name_path = './ResNetCRNN/UCF101actions.pkl'
+save_model_path = "./ResNetCRNN/ResNetCRNN_ckpt/"
 
 # EncoderCNN architecture
 CNN_fc_hidden1, CNN_fc_hidden2 = 1024, 768
@@ -33,8 +33,8 @@ RNN_FC_dim = 256
 
 # training parameters
 k = 101             # number of target category
-epochs = 120        # training epochs
-batch_size = 40  
+epochs = 100        # training epochs
+batch_size = 60
 learning_rate = 1e-3
 log_interval = 10   # interval for displaying training info
 
@@ -127,7 +127,7 @@ use_cuda = torch.cuda.is_available()                   # check if GPU exists
 device = torch.device("cuda" if use_cuda else "cpu")   # use CPU or GPU
 
 # Data loading parameters
-params = {'batch_size': batch_size, 'shuffle': True, 'num_workers': 4, 'pin_memory': True} if use_cuda else {}
+params = {'batch_size': batch_size, 'shuffle': True, 'num_workers': 10, 'pin_memory': True, 'drop_last': True} if use_cuda else {}
 
 
 # load UCF101 actions names
@@ -232,10 +232,10 @@ for epoch in range(epochs):
     B = np.array(epoch_train_scores)
     C = np.array(epoch_test_losses)
     D = np.array(epoch_test_scores)
-    np.save('./CRNN_epoch_training_losses.npy', A)
-    np.save('./CRNN_epoch_training_scores.npy', B)
-    np.save('./CRNN_epoch_test_loss.npy', C)
-    np.save('./CRNN_epoch_test_score.npy', D)
+    np.save('./ResNetCRNN/CRNN_epoch_training_losses.npy', A)
+    np.save('./ResNetCRNN/CRNN_epoch_training_scores.npy', B)
+    np.save('./ResNetCRNN/CRNN_epoch_test_loss.npy', C)
+    np.save('./ResNetCRNN/CRNN_epoch_test_score.npy', D)
 
 # plot
 fig = plt.figure(figsize=(10, 4))
@@ -254,7 +254,7 @@ plt.title("training scores")
 plt.xlabel('epochs')
 plt.ylabel('accuracy')
 plt.legend(['train', 'test'], loc="upper left")
-title = "./fig_UCF101_ResNetCRNN.png"
+title = "./ResNetCRNN/fig_UCF101_ResNetCRNN.png"
 plt.savefig(title, dpi=600)
 # plt.close(fig)
 plt.show()

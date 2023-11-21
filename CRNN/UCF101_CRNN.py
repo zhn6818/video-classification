@@ -16,9 +16,9 @@ from sklearn.metrics import accuracy_score
 import pickle
 
 # set path
-data_path = "./jpegs_256/"    # define UCF-101 RGB data path
-action_name_path = './UCF101actions.pkl'
-save_model_path = "./CRNN_ckpt/"
+data_path = "/data1/zhn/macdata/all_data/UCF101/jpegs_256/"    # define UCF-101 RGB data path
+action_name_path = './CRNN/UCF101actions.pkl'
+save_model_path = "./CRNN/CRNN_ckpt/"
 
 # EncoderCNN architecture
 CNN_fc_hidden1, CNN_fc_hidden2 = 1024, 768
@@ -34,7 +34,7 @@ RNN_FC_dim = 256
 # training parameters
 k = 101             # number of target category
 epochs = 120        # training epochs
-batch_size = 30  
+batch_size = 32  
 learning_rate = 1e-4
 log_interval = 10   # interval for displaying training info
 
@@ -50,7 +50,7 @@ def train(log_interval, model, device, train_loader, optimizer, epoch):
 
     losses = []
     scores = []
-    N_count = 0   # counting total trained sample in one epoch
+    N_count = 0   # counting total trained sample in one epoch 
     for batch_idx, (X, y) in enumerate(train_loader):
         # distribute data to device
         X, y = X.to(device), y.to(device).view(-1, )
@@ -127,7 +127,7 @@ use_cuda = torch.cuda.is_available()                   # check if GPU exists
 device = torch.device("cuda" if use_cuda else "cpu")   # use CPU or GPU
 
 # Data loading parameters
-params = {'batch_size': batch_size, 'shuffle': True, 'num_workers': 4, 'pin_memory': True} if use_cuda else {}
+params = {'batch_size': batch_size, 'shuffle': True, 'num_workers': 48, 'pin_memory': True} if use_cuda else {}
 
 # load UCF101 actions names
 with open(action_name_path, 'rb') as f:
@@ -221,10 +221,10 @@ for epoch in range(epochs):
     B = np.array(epoch_train_scores)
     C = np.array(epoch_test_losses)
     D = np.array(epoch_test_scores)
-    np.save('./CRNN_epoch_training_losses.npy', A)
-    np.save('./CRNN_epoch_training_scores.npy', B)
-    np.save('./CRNN_epoch_test_loss.npy', C)
-    np.save('./CRNN_epoch_test_score.npy', D)
+    np.save('./CRNN/CRNN_epoch_training_losses.npy', A)
+    np.save('./CRNN/CRNN_epoch_training_scores.npy', B)
+    np.save('./CRNN/CRNN_epoch_test_loss.npy', C)
+    np.save('./CRNN/CRNN_epoch_test_score.npy', D)
 
 # plot
 fig = plt.figure(figsize=(10, 4))
@@ -243,7 +243,7 @@ plt.title("training scores")
 plt.xlabel('epochs')
 plt.ylabel('accuracy')
 plt.legend(['train', 'test'], loc="upper left")
-title = "./fig_UCF101_CRNN.png"
+title = "./CRNN/fig_UCF101_CRNN.png"
 plt.savefig(title, dpi=600)
 # plt.close(fig)
 plt.show()
