@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-A = np.load('./CRNN/CRNN_epoch_training_losses.npy')
-B = np.load('./CRNN/CRNN_epoch_training_scores.npy')
-C = np.load('./CRNN/CRNN_epoch_test_loss.npy')
-D = np.load('./CRNN/CRNN_epoch_test_score.npy')
+A = np.load('./ResNetCRNN/CRNN_epoch_training_losses50.npy')
+B = np.load('./ResNetCRNN/CRNN_epoch_training_scores50.npy')
+C = np.load('./ResNetCRNN/CRNN_epoch_test_loss50.npy')
+D = np.load('./ResNetCRNN/CRNN_epoch_test_score50.npy')
 
-epochs = 93
+epochs = 50
 
 # plot
 fig = plt.figure(figsize=(10, 4))
@@ -25,7 +25,7 @@ plt.title("training scores")
 plt.xlabel('epochs')
 plt.ylabel('accuracy')
 plt.legend(['train', 'test'], loc="upper left")
-title = "./CRNN/fig_UCF101_CRNN.png"
+title = "./ResNetCRNN/fig_UCF101_CRNN50.png"
 plt.savefig(title, dpi=600)
 # plt.close(fig)
 plt.show()

@@ -46,6 +46,12 @@
             "env": {
                 "CUDA_VISIBLE_DEVICES": "0"
             },
+            "args": [
+                "--cnnPath",
+                "cnn_encoder_epoch49.pth",
+                "--rnnPath",
+                "rnn_decoder_epoch49.pth"
+            ],
             "justMyCode": true
         }
     ]

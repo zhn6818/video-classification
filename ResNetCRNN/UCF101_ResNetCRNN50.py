@@ -14,6 +14,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn.metrics import accuracy_score
 import pickle
+import sys
+sys.path.append("./")
+sys.path.append("../")
+from opts import parse_opts
 
 # set path
 data_path = "/data1/zhn/macdata/all_data/UCF101/jpegs_256/"    # define UCF-101 RGB data path
@@ -34,7 +38,7 @@ RNN_FC_dim = 256
 # training parameters
 k = 101             # number of target category
 epochs = 100        # training epochs
-batch_size = 30
+batch_size = 128
 learning_rate = 1e-3
 log_interval = 10   # interval for displaying training info
 
@@ -187,6 +191,21 @@ valid_loader = data.DataLoader(valid_set, **params)
 cnn_encoder = ResCNNEncoder(fc_hidden1=CNN_fc_hidden1, fc_hidden2=CNN_fc_hidden2, drop_p=dropout_p, CNN_embed_dim=CNN_embed_dim).to(device)
 rnn_decoder = DecoderRNN(CNN_embed_dim=CNN_embed_dim, h_RNN_layers=RNN_hidden_layers, h_RNN=RNN_hidden_nodes, 
                          h_FC_dim=RNN_FC_dim, drop_p=dropout_p, num_classes=k).to(device)
+
+opt = parse_opts()
+if opt.cnnPath is not None:
+    # cnn_encoder.load_state_dict(torch.load(os.path.join(save_model_path, opt.cnnPath)))
+    cnn_encoder.load_state_dict(
+        {k.replace('module.', ''):v for k,v in torch.load(os.path.join(save_model_path, opt.cnnPath)).items()}
+        )
+    
+if opt.rnnPath is not None:
+    # rnn_decoder.load_state_dict(torch.load(os.path.join(save_model_path, opt.rnnPath)))
+    rnn_decoder.load_state_dict(
+        {k.replace('module.', ''):v for k,v in torch.load(os.path.join(save_model_path, opt.rnnPath)).items()}
+        )
+    
+
 
 # Parallelize model to multiple GPUs
 if torch.cuda.device_count() > 1:

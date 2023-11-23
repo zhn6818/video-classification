@@ -364,7 +364,7 @@ class DecoderRNN(nn.Module):
             num_layers=h_RNN_layers,       
             batch_first=True,       # input & output will has batch size as 1s dimension. e.g. (batch, time_step, input_size)
         )
-
+ 
         self.fc1 = nn.Linear(self.h_RNN, self.h_FC_dim)
         self.fc2 = nn.Linear(self.h_FC_dim, self.num_classes)
 
