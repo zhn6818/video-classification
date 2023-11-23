@@ -13,6 +13,11 @@ def parse_opts():
                         type=Path,
                         help='Directory path of videos')
 
+    parser.add_argument('--opti',
+                        default=None,
+                        type=Path,
+                        help='opti path of videos')
+     
     args = parser.parse_args()
 
     return args

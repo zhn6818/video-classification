@@ -38,10 +38,10 @@ RNN_FC_dim = 256
 # training parameters
 k = 101             # number of target category
 epochs = 100        # training epochs
-batch_size = 128
+batch_size = 2
 learning_rate = 1e-3
 log_interval = 10   # interval for displaying training info
-
+2
 # Select which frame to begin & end in videos
 begin_frame, end_frame, skip_frame = 1, 29, 1
 
@@ -204,7 +204,7 @@ if opt.rnnPath is not None:
     rnn_decoder.load_state_dict(
         {k.replace('module.', ''):v for k,v in torch.load(os.path.join(save_model_path, opt.rnnPath)).items()}
         )
-    
+
 
 
 # Parallelize model to multiple GPUs
@@ -227,6 +227,10 @@ elif torch.cuda.device_count() == 1:
 
 optimizer = torch.optim.Adam(crnn_params, lr=learning_rate)
 
+if opt.opti is not None:
+    optimizer.load_state_dict(
+        {k.replace('module.', ''):v for k,v in torch.load(os.path.join(save_model_path, opt.opti)).items()}
+        )
 
 # record training process
 epoch_train_losses = []
