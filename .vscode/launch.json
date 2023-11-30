@@ -53,6 +53,50 @@
                 "rnn_decoder_epoch49.pth"
             ],
             "justMyCode": true
+        },
+        {
+            "name": "Python: ResNetBinary/testResnet.py",
+            "type": "python",
+            "request": "launch",
+            "program": "ResNetBinary/testResnet.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Python: ResNetBinary/ResNetBinary.py",
+            "type": "python",
+            "request": "launch",
+            "program": "ResNetBinary/ResNetBinary.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "6"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Python: ResNetBinary/rnn_classify.py",
+            "type": "python",
+            "request": "launch",
+            "program": "ResNetBinary/rnn_classify.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "6"
+            },
+            "justMyCode": true
+        },
+        {
+            "name": "Python: ResNetBinary/rnn_regre.py",
+            "type": "python",
+            "request": "launch",
+            "program": "ResNetBinary/rnn_regre.py",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "6"
+            },
+            "justMyCode": true
         }
     ]
 }
