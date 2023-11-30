@@ -18,3 +18,5 @@ CRNN_ckpt
 /ResNetBinary/CRNN_epoch_test_loss.npy
 *.pkl
 *.npy
+/ResNetBinary/mnist
+/ResNetBinary/ResNetBinary_ckpt
