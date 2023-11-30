@@ -15,3 +15,6 @@ CRNN_ckpt
 /ResNetCRNN/CRNN_epoch_training_scores50.npy
 /ResNetCRNN/fig_UCF101_CRNN50.png
 /ResNetCRNN/ResNetCRNN50_ckpt
+/ResNetBinary/CRNN_epoch_test_loss.npy
+*.pkl
+*.npy
